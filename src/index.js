@@ -1,32 +1,26 @@
 import './style.css';
+import { addNewScore, getAllGameScores } from './modules/api.js';
 
-const scoreList = document.querySelector('.score-list');
+const refreshButton = document.querySelector('.refresh');
 const button = document.querySelector('.btn');
 
-const data = JSON.parse(localStorage.getItem('scores')) || [];
-const displayScore = (scores) => {
-  let display = '';
-  scores.forEach((score) => {
-    display += `
-        <p class="score"><span>${score.name}</span><span>${score.score}</span></p>
-        `;
-  });
-  scoreList.innerHTML = display;
-};
-const addScore = () => {
-  const nameInput = document.querySelector('#fname').value;
-  const scoreInput = document.querySelector('#lname').value;
-  if (nameInput && scoreInput) {
-    data.push({ name: nameInput, score: scoreInput });
-    localStorage.setItem('scores', JSON.stringify(data));
-    const scores = JSON.parse(localStorage.getItem('scores'));
-    displayScore(scores);
-  }
-};
+button.addEventListener('click', (ev) => {
+  ev.preventDefault();
 
-button.addEventListener('click', () => {
-  addScore();
+  const nameInput = document.querySelector('#fname');
+  const scoreInput = document.querySelector('#lname');
+  if (nameInput.value && scoreInput.value) {
+    const newScore = {
+      user: nameInput.value,
+      score: scoreInput.value,
+    };
+    addNewScore(newScore);
+  }
+  nameInput.value = '';
+  scoreInput.value = '';
 });
+
+refreshButton.addEventListener('click', getAllGameScores);
 window.addEventListener('DOMContentLoaded', () => {
-  displayScore(data);
+  getAllGameScores();
 });
