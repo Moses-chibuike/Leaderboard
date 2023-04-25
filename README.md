@@ -45,7 +45,7 @@ HTML, CSS, Javascript
 
 
 ## 🚀 Live Demo <a name="live-demo"></a>
- demo link(https://moses-chibuike.github.io/Leaderboard/src/)
+- [Live Demo Link](https://moses-chibuike.github.io/Leaderboard/src/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
